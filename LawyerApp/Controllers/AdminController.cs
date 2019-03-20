@@ -6,25 +6,20 @@ using System.Web.Mvc;
 
 namespace LawyerApp.Controllers
 {
-    [Authorize(Roles = "SuperAdmin")]
-    public class HomeController : Controller
+    [Authorize(Roles ="SuperAdmin")]
+    public class AdminController : Controller
     {
+        // GET: Admin
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult About()
+        public ActionResult CreateUser()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
-
-        public ActionResult Contact()
+        public ActionResult AsignRole()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }

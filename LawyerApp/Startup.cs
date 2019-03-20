@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using LawyerApp.Models;
 
 [assembly: OwinStartupAttribute(typeof(LawyerApp.Startup))]
 namespace LawyerApp
@@ -9,6 +10,12 @@ namespace LawyerApp
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            CreateUserAndRoles();
+        }
+        public void CreateUserAndRoles()
+        {
+            ApplicationDbContext appDb = new ApplicationDbContext();
+            
         }
     }
 }

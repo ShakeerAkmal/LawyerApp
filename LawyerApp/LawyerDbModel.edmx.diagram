@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d3b29b9aa4b04eed9d142778bdba67b9" Name="Diagram1" >
+        <EntityTypeShape EntityType="siteDbModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="siteDbModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="siteDbModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="siteDbModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" />
+        <AssociationConnector Association="siteDbModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="siteDbModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <EntityTypeShape EntityType="siteDbModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.375" />
+        <AssociationConnector Association="siteDbModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="siteDbModel.Case" Width="1.5" PointX="8.25" PointY="0.75" />
+        <EntityTypeShape EntityType="siteDbModel.CaseType" Width="1.5" PointX="6" PointY="7.125" />
+        <EntityTypeShape EntityType="siteDbModel.CourtComplex" Width="1.5" PointX="6" PointY="9.625" />
+        <EntityTypeShape EntityType="siteDbModel.Judge" Width="1.5" PointX="6" PointY="14.75" />
+        <EntityTypeShape EntityType="siteDbModel.SessionDivision" Width="1.5" PointX="6" PointY="17.5" />
+        <EntityTypeShape EntityType="siteDbModel.State" Width="1.5" PointX="6" PointY="12.125" />
+        <AssociationConnector Association="siteDbModel.FK_Case_AspNetUsers" />
+        <AssociationConnector Association="siteDbModel.FK_Case_CaseType" />
+        <AssociationConnector Association="siteDbModel.FK_Case_CourtComplex" />
+        <AssociationConnector Association="siteDbModel.FK_Case_Judge" />
+        <AssociationConnector Association="siteDbModel.FK_Case_SessionDivision" />
+        <AssociationConnector Association="siteDbModel.FK_Case_State" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
