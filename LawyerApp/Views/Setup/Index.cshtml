@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Setup</h2>
+<section class="setupNavigation">
+    <div class="setupNavigationone">
+        <div class="column">
+            <h4 onclick="loadPartialView(1)">Case Type</h4>
+        </div>
+        <div class="column">
+            <h4 onclick="loadPartialView(2)">Court Complexes</h4>
+        </div>
+        <div class="column">
+            <h4 onclick="loadPartialView(3)">Judges</h4>
+        </div>
+        <div class="column">
+            <h4 onclick="loadPartialView(4)">States</h4>
+        </div>
+        <div class="column">
+            <h4 onclick="loadPartialView(5)">Session Divisions</h4>
+        </div>
+    </div>
+    <div id="SetupData" class="setupNavigationtwo"></div>
+    
+</section>
+<script>
+
+
+    $(document).ready(function () {
+        loadPartialView(1)
+       
+    });
+
+
+    function loadPartialView(ViewNumber) {
+         
+        var urls ;
+        if (ViewNumber == 1) {
+
+            urls = '@Url.Action("CaseTypes", "Setup")'
+        }
+        if (ViewNumber == 2) {
+            urls = '@Url.Action("CourtComplexes", "Setup")'
+        }
+        if (ViewNumber == 3) {
+            urls = '@Url.Action("Judges", "Setup")'
+        }
+        if (ViewNumber == 4) {
+            urls = '@Url.Action("States", "Setup")'
+        }
+        if (ViewNumber == 5) {
+            urls = '@Url.Action("SessionDivisions", "Setup")'
+        }
+        $.ajax({
+            url: urls,
+            type: 'GET',
+            error: function (xhr) {
+                 
+                alert('Error: ' + xhr.statusText);
+
+            },
+            success: function (result) {
+                 
+                $('#SetupData').html(result);
+            }
+        });
+    }
+
+
+
+</script>
+
+    
+
+

@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using LawyerApp.Models;
 using System.Data;
+using System.Collections.Generic;
 
 namespace LawyerApp.Controllers
 {
@@ -142,7 +143,7 @@ namespace LawyerApp.Controllers
         {
             
             siteDbEntities s = new siteDbEntities();
-            var alllRoles = s.AspNetRoles.ToList().Select(x => new SelectListItem
+            IEnumerable<SelectListItem> alllRoles = s.AspNetRoles.ToList().Select(x => new SelectListItem
             {
                 Value = x.Name,
                 Text = x.Display_Name.ToString()

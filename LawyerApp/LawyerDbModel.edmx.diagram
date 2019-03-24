@@ -14,17 +14,17 @@
         <EntityTypeShape EntityType="siteDbModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.375" />
         <AssociationConnector Association="siteDbModel.AspNetUserRoles" />
         <EntityTypeShape EntityType="siteDbModel.Case" Width="1.5" PointX="8.25" PointY="0.75" />
-        <EntityTypeShape EntityType="siteDbModel.CaseType" Width="1.5" PointX="6" PointY="7.125" />
         <EntityTypeShape EntityType="siteDbModel.CourtComplex" Width="1.5" PointX="6" PointY="9.625" />
         <EntityTypeShape EntityType="siteDbModel.Judge" Width="1.5" PointX="6" PointY="14.75" />
         <EntityTypeShape EntityType="siteDbModel.SessionDivision" Width="1.5" PointX="6" PointY="17.5" />
         <EntityTypeShape EntityType="siteDbModel.State" Width="1.5" PointX="6" PointY="12.125" />
         <AssociationConnector Association="siteDbModel.FK_Case_AspNetUsers" />
-        <AssociationConnector Association="siteDbModel.FK_Case_CaseType" />
         <AssociationConnector Association="siteDbModel.FK_Case_CourtComplex" />
         <AssociationConnector Association="siteDbModel.FK_Case_Judge" />
         <AssociationConnector Association="siteDbModel.FK_Case_SessionDivision" />
         <AssociationConnector Association="siteDbModel.FK_Case_State" />
+        <EntityTypeShape EntityType="siteDbModel.CaseType" Width="1.5" PointX="3.375" PointY="6.875" />
+        <AssociationConnector Association="siteDbModel.FK_Case_CaseType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

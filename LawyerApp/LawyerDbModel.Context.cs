@@ -31,10 +31,10 @@ namespace LawyerApp
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<Case> Cases { get; set; }
-        public virtual DbSet<CaseType> CaseTypes { get; set; }
         public virtual DbSet<CourtComplex> CourtComplexes { get; set; }
         public virtual DbSet<Judge> Judges { get; set; }
         public virtual DbSet<SessionDivision> SessionDivisions { get; set; }
         public virtual DbSet<State> States { get; set; }
+        public virtual DbSet<CaseType> CaseTypes { get; set; }
     }
 }

@@ -346,17 +346,12 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
           <EntitySet Name="Cases" EntityType="siteDbModel.Case" />
-          <EntitySet Name="CaseTypes" EntityType="siteDbModel.CaseType" />
           <EntitySet Name="CourtComplexes" EntityType="siteDbModel.CourtComplex" />
           <EntitySet Name="Judges" EntityType="siteDbModel.Judge" />
           <EntitySet Name="SessionDivisions" EntityType="siteDbModel.SessionDivision" />
           <EntitySet Name="States" EntityType="siteDbModel.State" />
           <AssociationSet Name="FK_Case_AspNetUsers" Association="siteDbModel.FK_Case_AspNetUsers">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="Case" EntitySet="Cases" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Case_CaseType" Association="siteDbModel.FK_Case_CaseType">
-            <End Role="CaseType" EntitySet="CaseTypes" />
             <End Role="Case" EntitySet="Cases" />
           </AssociationSet>
           <AssociationSet Name="FK_Case_CourtComplex" Association="siteDbModel.FK_Case_CourtComplex">
@@ -373,6 +368,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_Case_State" Association="siteDbModel.FK_Case_State">
             <End Role="State" EntitySet="States" />
+            <End Role="Case" EntitySet="Cases" />
+          </AssociationSet>
+          <EntitySet Name="CaseTypes" EntityType="siteDbModel.CaseType" />
+          <AssociationSet Name="FK_Case_CaseType" Association="siteDbModel.FK_Case_CaseType">
+            <End Role="CaseType" EntitySet="CaseTypes" />
             <End Role="Case" EntitySet="Cases" />
           </AssociationSet>
         </EntityContainer>
@@ -492,20 +492,11 @@
           <Property Name="Court" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="LawyerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="siteDbModel.FK_Case_AspNetUsers" FromRole="Case" ToRole="AspNetUser" />
-          <NavigationProperty Name="CaseType" Relationship="siteDbModel.FK_Case_CaseType" FromRole="Case" ToRole="CaseType" />
           <NavigationProperty Name="CourtComplex" Relationship="siteDbModel.FK_Case_CourtComplex" FromRole="Case" ToRole="CourtComplex" />
           <NavigationProperty Name="Judge" Relationship="siteDbModel.FK_Case_Judge" FromRole="Case" ToRole="Judge" />
           <NavigationProperty Name="SessionDivision" Relationship="siteDbModel.FK_Case_SessionDivision" FromRole="Case" ToRole="SessionDivision" />
           <NavigationProperty Name="State" Relationship="siteDbModel.FK_Case_State" FromRole="Case" ToRole="State" />
-        </EntityType>
-        <EntityType Name="CaseType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CaseType1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Cases" Relationship="siteDbModel.FK_Case_CaseType" FromRole="CaseType" ToRole="Case" />
+          <NavigationProperty Name="CaseType" Relationship="siteDbModel.FK_Case_CaseType" FromRole="Case" ToRole="CaseType" />
         </EntityType>
         <EntityType Name="CourtComplex">
           <Key>
@@ -555,20 +546,6 @@
             </Principal>
             <Dependent Role="Case">
               <PropertyRef Name="LawyerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Case_CaseType">
-          <End Type="siteDbModel.CaseType" Role="CaseType" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="siteDbModel.Case" Role="Case" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CaseType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Case">
-              <PropertyRef Name="CaseTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -623,6 +600,29 @@
             </Principal>
             <Dependent Role="Case">
               <PropertyRef Name="StateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CaseType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CaseType1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cases" Relationship="siteDbModel.FK_Case_CaseType" FromRole="CaseType" ToRole="Case" />
+        </EntityType>
+        <Association Name="FK_Case_CaseType">
+          <End Type="siteDbModel.CaseType" Role="CaseType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="siteDbModel.Case" Role="Case" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CaseType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Case">
+              <PropertyRef Name="CaseTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -720,15 +720,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CaseTypes">
-            <EntityTypeMapping TypeName="siteDbModel.CaseType">
-              <MappingFragment StoreEntitySet="CaseType">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="CaseType1" ColumnName="CaseType" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CourtComplexes">
             <EntityTypeMapping TypeName="siteDbModel.CourtComplex">
               <MappingFragment StoreEntitySet="CourtComplex">
@@ -763,6 +754,15 @@
                 <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
                 <ScalarProperty Name="state1" ColumnName="state" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CaseTypes">
+            <EntityTypeMapping TypeName="siteDbModel.CaseType">
+              <MappingFragment StoreEntitySet="CaseType">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CaseType1" ColumnName="CaseType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
