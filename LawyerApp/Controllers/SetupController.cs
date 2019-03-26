@@ -28,15 +28,18 @@ namespace LawyerApp.Controllers
         }
         public ActionResult Judges()
         {
-            return PartialView("_Judges");
+            List<Judge> judges = db.Judges.Where(a => a.IsDeleted == false).ToList();
+            return PartialView("_Judges", judges);
         }
         public ActionResult States()
         {
-            return PartialView("_States");
+            List<State> states = db.States.Where(a => a.isDeleted == false).ToList();
+            return PartialView("_States", states);
         }
         public ActionResult SessionDivisions()
         {
-            return PartialView("_SessionDivisions");
+            List<SessionDivision> divisions = db.SessionDivisions.Where(a => a.isDeleted == false).ToList();
+            return PartialView("_SessionDivisions", divisions);
         }
 
         public bool AddCaseType( FormCollection formdata)
@@ -74,6 +77,67 @@ namespace LawyerApp.Controllers
             int x = Int32.Parse(id);
             var courtComplex = db.CourtComplexes.Where(a => a.Id == x).FirstOrDefault();
             courtComplex.IsDeleted = true;
+            db.SaveChanges();
+            return true;
+        }
+        public bool AddJudge(FormCollection formdata)
+        {
+            Judge judge = new Judge();
+            var JudgeName = formdata["Name"];
+            var JudgeDesignation = formdata["Designation"];
+
+            judge.IsDeleted = false;
+            judge.Name = JudgeName;
+            judge.Designation = JudgeDesignation;
+
+            db.Judges.Add(judge);
+            db.SaveChanges();
+
+            return true;
+        }
+        public bool DeleteJudge(string id)
+        {
+            int x = Int32.Parse(id);
+            var judge = db.Judges.Where(a => a.Id == x).FirstOrDefault();
+            judge.IsDeleted = true;
+            db.SaveChanges();
+            return true;
+        }
+        public bool AddState(FormCollection formdata)
+        {
+            State state = new State();
+            var stateName = formdata["State"];
+            state.isDeleted = false;
+            state.state1 = stateName;
+            db.States.Add(state);
+            db.SaveChanges();
+
+            return true;
+        }
+        public bool DeleteState(string id)
+        {
+            int x = Int32.Parse(id);
+            var state = db.States.Where(a => a.id == x).FirstOrDefault();
+            state.isDeleted = true;
+            db.SaveChanges();
+            return true;
+        }
+        public bool AddDivision(FormCollection formdata)
+        {
+            SessionDivision Division = new SessionDivision();
+            var divisionName = formdata["Division"];
+            Division.isDeleted = false;
+            Division.SessionDivision1 = divisionName;
+            db.SessionDivisions.Add(Division);
+            db.SaveChanges();
+
+            return true;
+        }
+        public bool DeleteDivision(string id)
+        {
+            int x = Int32.Parse(id);
+            var division = db.SessionDivisions.Where(a => a.Id == x).FirstOrDefault();
+            division.isDeleted = true;
             db.SaveChanges();
             return true;
         }

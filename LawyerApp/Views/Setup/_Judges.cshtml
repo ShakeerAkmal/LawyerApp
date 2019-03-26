@@ -1,1 +1,99 @@
-﻿<h3> Judges</h3>
+﻿@model List<Judge>
+
+<div>
+    <h3> case type</h3>
+</div>
+<div id="addJudgeForm" class="setupForm">
+    @using (Ajax.BeginForm("AddJudge", "Setup", new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @id = "JudgeForm" }))
+    {
+        <div>
+            <div class="col-md-12">
+                @Html.Label("Name")
+                @Html.TextBox("Name", "", new { @class = "form-control" })
+            </div>
+        </div>
+        <div>
+            <div class="col-md-12">
+                @Html.Label("Designation")
+                @Html.TextBox("Designation", "", new { @class = "form-control" })
+            </div>
+        </div>
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-12">
+                    <input type="button" value="Add Judge" onclick="submitJudgeForm()" class="btn btn-default" />
+                </div>
+            </div>
+
+
+    }
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div id="caseTypeGrid" class="setupGrid">
+
+    @{
+        WebGrid grid = new WebGrid(null, rowsPerPage: 15);
+        grid.Bind(Model, rowCount: 15);
+    }
+    @grid.GetHtml(tableStyle: "table table-bordered",
+ mode: WebGridPagerModes.All,
+    columns: grid.Columns(
+    grid.Column("Name", " Name", canSort: false),
+    grid.Column("Designation", " Designation", canSort: false),
+
+
+
+    grid.Column(header: "Action",
+                format: @<a data-value="@item.Id" href="#" onclick="DeleteJudge(@item.Id)">Delete</a>)
+))
+
+
+</div>
+<script type="text/javascript">
+    function submitJudgeForm() {
+        var textVal = $("#Name").val();
+        var textValDesignation = $("#Designation").val();
+
+
+
+        if (!($.trim(textVal) == "") || ($.trim(textValDesignation) == "")) {
+
+
+                $.ajax({
+                    url: '@Url.Action("AddJudge", "Setup")',
+                    type: 'POST',
+                    data: $('#JudgeForm').serialize(),
+                    success: function (data) {
+
+                        $("#SetupData").load('/Setup/Judges');
+
+                    }
+                });
+            }
+            else {
+                $('#JudgeForm')[0].reset();
+                alert("Please Fill Name and Designation of the Judge")
+            }
+        }
+
+
+    function DeleteJudge(id) {
+
+            var idstring = id;
+            $.ajax({
+                url: '@Url.Action("DeleteJudge", "Setup")',
+                type: 'POST',
+                data:{id: idstring},
+                success: function (data) {
+                    loadPartialView(3)
+                }
+            });
+        }
+
+
+</script>

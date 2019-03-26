@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -350,10 +351,11 @@
     <Content Include="Views\Setup\_Judges.cshtml" />
     <Content Include="Views\Setup\_States.cshtml" />
     <Content Include="Views\Setup\_SessionDivisions.cshtml" />
+    <Content Include="Views\Case\Add.cshtml" />
+    <Content Include="Views\Case\AddCase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Case\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -1,1 +1,85 @@
-﻿<h3> States</h3>
+﻿@model List<State>
+
+<div>
+    <h3> case type</h3>
+</div>
+<div id="addstateForm" class="setupForm">
+    @using (Ajax.BeginForm("AddState", "Setup", new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @id = "stateForm" }))
+    {
+        <div>
+            <div class="col-md-12">
+                @Html.TextBox("State", "", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-12">
+                <input type="button" value="Add State" onclick="submitStateForm()" class="btn btn-default" />
+            </div>
+        </div>
+
+
+    }
+</div>
+<br>
+<br>
+<br>
+<br>
+
+<div id="caseTypeGrid" class="setupGrid">
+
+    @{
+        WebGrid grid = new WebGrid(null, rowsPerPage: 15);
+        grid.Bind(Model, rowCount: 15);
+    }
+    @grid.GetHtml(tableStyle: "table table-bordered",
+ mode: WebGridPagerModes.All,
+    columns: grid.Columns(
+    grid.Column("state1", "State", canSort: false),
+
+
+    grid.Column(header: "Action",
+                format: @<a data-value="@item.Id" href="#" onclick="deleteState(@item.Id)">Delete</a>)
+))
+
+
+</div>
+<script type="text/javascript">
+    function submitStateForm() {
+        var textVal = $("#State").val();
+
+        if (!($.trim(textVal) == "")) {
+
+
+            $.ajax({
+                url: '@Url.Action("AddState", "Setup")',
+                type: 'POST',
+                data: $('#stateForm').serialize(),
+                success: function (data) {
+
+                    $("#SetupData").load('/Setup/States');
+
+                }
+            });
+        }
+        else {
+            $('#stateForm')[0].reset();
+            alert("State Required")
+        }
+    }
+
+
+    function deleteState(id) {
+
+        var idstring = id;
+        $.ajax({
+            url: '@Url.Action("DeleteState", "Setup")',
+            type: 'POST',
+            data: { id: idstring },
+            success: function (data) {
+                loadPartialView(4)
+            }
+        });
+    }
+
+
+</script>
