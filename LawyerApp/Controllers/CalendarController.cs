@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using LawyerApp.Models;
+using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -11,30 +13,29 @@ namespace LawyerApp.Controllers
 {
     public class CalendarController : Controller
     {
+        siteDbEntities db = new siteDbEntities();
         // GET: Calendar
         public ActionResult Index()
         {
             return View();
         }
         public JsonResult GetEvents()
+
         {
-            var columns = new Dictionary<string, string>
+            List<CalendarViewModel> calendarList = new List<CalendarViewModel>();
+            var User = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            var caseList = db.Cases.Where(a => a.LawyerId == User).Select(a => new { a.NextCaseDate, a.OtherDetails, a.CaseNumber }).ToList();
+            foreach (var casee in caseList)
             {
-                {"Subject","ssssdd"},
-                {"Description","asdasdas"},
-                {"Start","2019/03/20"},
-                {"End","2019/03/21"},
-                {"ThemeColor","red"},
-                {"IsFullDay","true"}
-            };
+                CalendarViewModel calendar = new CalendarViewModel();
+                calendar.DateString = casee.NextCaseDate.Value.Date.ToString();
+                calendar.CaseNumber = casee.CaseNumber;
+                calendar.OtherDetails = casee.OtherDetails;
+                calendarList.Add(calendar);
 
-
-            var listNumber = columns.Select(kvp => kvp.Key).ToList();
-            return new JsonResult { Data = listNumber, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-
-
-
-
+            }
+            
+            return new JsonResult { Data = calendarList, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
     }
 }

@@ -32,6 +32,7 @@ namespace LawyerApp
         public Nullable<bool> IsNewCase { get; set; }
         public string Court { get; set; }
         public string LawyerId { get; set; }
+        public string ClientId { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual CourtComplex CourtComplex { get; set; }

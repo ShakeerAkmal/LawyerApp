@@ -38,15 +38,14 @@
                 success: function (data) {
                     $.each(data, function (i, v) {
                         events.push({
-                            title: v.Subject,
-                            description: v.Description,
-                            start: moment(v.Start),
+                            title: v.CaseNumber,
+                            description: v.OtherDetails,
+                            start: moment(v.DateString),
                             end: v.End != null ? moment(v.End) : null,
-                            color: v.ThemeColor,
-                            allDay : v.IsFullDay
+                            color: "Blue",
+                            allDay: "False"
                         });
                     })
-
                     GenerateCalender(events);
                 },
                 error: function (error) {
@@ -71,7 +70,7 @@
                     eventClick: function (calEvent, jsEvent, view) {
                         $('#myModal #eventTitle').text(calEvent.title);
                         var $description = $('<div/>');
-                        $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
+                        $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start.format("DD-MMM-YYYY ")));
                         if (calEvent.end != null) {
                             $description.append($('<p/>').html('<b>End:</b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
                         }

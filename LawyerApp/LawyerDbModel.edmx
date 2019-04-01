@@ -89,6 +89,7 @@
           <Property Name="IsNewCase" Type="bit" />
           <Property Name="Court" Type="varchar(max)" />
           <Property Name="LawyerId" Type="nvarchar" MaxLength="128" />
+          <Property Name="ClientId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="CaseType">
           <Key>
@@ -497,6 +498,7 @@
           <NavigationProperty Name="SessionDivision" Relationship="siteDbModel.FK_Case_SessionDivision" FromRole="Case" ToRole="SessionDivision" />
           <NavigationProperty Name="State" Relationship="siteDbModel.FK_Case_State" FromRole="Case" ToRole="State" />
           <NavigationProperty Name="CaseType" Relationship="siteDbModel.FK_Case_CaseType" FromRole="Case" ToRole="CaseType" />
+          <Property Name="ClientId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CourtComplex">
           <Key>
@@ -699,6 +701,7 @@
           <EntitySetMapping Name="Cases">
             <EntityTypeMapping TypeName="siteDbModel.Case">
               <MappingFragment StoreEntitySet="Case">
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="LawyerId" ColumnName="LawyerId" />
                 <ScalarProperty Name="Court" ColumnName="Court" />
                 <ScalarProperty Name="IsNewCase" ColumnName="IsNewCase" />

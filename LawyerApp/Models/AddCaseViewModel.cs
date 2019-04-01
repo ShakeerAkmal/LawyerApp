@@ -33,7 +33,7 @@ namespace LawyerApp.Models
         [Display(Name = "Next Stage")]
         public string NextStage { get; set; }
         [Display(Name = "Case Type ")]
-        public string CaseTypeId { get; set; }
+        public Nullable<int> CaseTypeId { get; set; }
         [Display(Name = "Court Complex ")]
         public Nullable<int> CourtComplexId { get; set; }
         [Display(Name = "Judge")]
@@ -42,12 +42,15 @@ namespace LawyerApp.Models
         public Nullable<int> SessionDivisionId { get; set; }
         [Display(Name = "State ")]
         public Nullable<int> StateId { get; set; }
-        [Display(Name = "Is NewCase")]
+        [Display(Name = "Select Case Type")]
         public Nullable<bool> IsNewCase { get; set; }
-        [Display(Name = "Court")]
+        [Display(Name = "Select Court")]
         public string Court { get; set; }
         [Display(Name = "FirstParty")]
         public string LawyerId { get; set; }
+        [Display(Name = "Client Email")]
+        public string ClientId { get; set; }
+        public List<AspNetUser> ClientEmails { get; set; }
 
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual CaseType CaseType { get; set; }
