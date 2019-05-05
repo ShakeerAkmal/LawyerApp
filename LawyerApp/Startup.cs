@@ -9,6 +9,7 @@ namespace LawyerApp
     {
         public void Configuration(IAppBuilder app)
         {
+            app.MapSignalR();
             ConfigureAuth(app);
             CreateUserAndRoles();
         }
